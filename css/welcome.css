@@ -1,0 +1,14 @@
+body
+{
+  background: #99bbaa;
+}
+
+h1
+{
+  text-align: center;
+  margin: 0;
+  position: absolute;
+  float: left;
+  top: 40%;
+  line-height: 150%;
+}

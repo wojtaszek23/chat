@@ -1,0 +1,64 @@
+html,body 
+{
+  height:100%;
+}
+
+.users
+{
+  display: block;
+}
+
+.users:hover
+{
+  background-color: orange;
+  cursor: pointer;
+}
+
+#main_chat_window
+{
+  box-sizing: border-box;
+  overflow-y: scroll;
+  float: left;
+  width: 90%;
+  height: 80%;
+  white-space:pre-line;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#logout_button
+{
+  height: 5%;
+  width: 10%;
+}
+
+#users_window
+{
+  box-sizing: border-box;
+  overflow-y: scroll;
+  float: left;
+  width: 10%;
+  height: 75%;
+  border-style: solid;
+  border-width: 1px;
+}
+
+#typing_window
+{
+  box-sizing: border-box;
+  clear: both;
+  float:left;
+  width: 90%;
+  height: 15%;
+  resize: none;
+  overflow-y: scroll;
+}
+
+#send_button
+{
+  box-sizing: border-box;
+  float: left;
+  height: 5%;
+  width: 10%;
+  white-space: normal;
+}

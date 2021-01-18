@@ -1,0 +1,23 @@
+body
+{
+  background: #99bbaa;
+  text-align: center;
+}
+
+.error
+{
+  color: red;
+}
+
+#header
+{
+  height: 20%;
+  font-size: 150%;
+  text-align: center;
+}
+
+#form
+{
+  clear: both;
+  height: 35%;
+}
