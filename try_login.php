@@ -9,6 +9,9 @@
     exit();
   }
   
+  //store nick provided by user to session and local variables
+  $nick = $_SESSION['nick'] = $_POST['nick'];
+  
   //if provided nick consists of empty string
   if($nick == "")
   {
@@ -18,8 +21,7 @@
     exit();
   }
   
-  //store nick and password of user to local variables
-  $nick = $_SESSION['nick'] = $_POST['nick'];
+  //store password provided by user to local variables
   $password1 = $_POST['password'];
   
   //if provided password consists of empty string

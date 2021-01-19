@@ -18,6 +18,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <title>Czat</title>
   <link rel="stylesheet" href="./css/main.css" type="text/css" />
+  
 </head>
 <body>
   <div id="main_chat_window"></div>
@@ -26,6 +27,7 @@
   </a>
   <div id="users_window"></div>
   <textarea id="typing_window" name="typing_window" type="text"></textarea>
-  <input type="button" id="send_button" value="Wysłanie wiadomości"></input>
+  <input type="button" id="send_button" value="Wysłanie wiadomości" onclick="printUsersList()"></input>
+  <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
