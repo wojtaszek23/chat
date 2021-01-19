@@ -1,15 +1,10 @@
 <?php
   //open access to session variables
   session_start();
-  
-  if(isset($_SESSION['nick_logged']) && $_SESSION['logged'] == true)
+  if(!isset($_SESSION['nick_logged']) || $_SESSION['logged'] == false)
   {
-    //echo "Jesteś zalogowany jako użytkornik ".$_SESSION['nick_logged'];
-    session_destroy();
-  }
-  else
-  {
-    //echo "Nieudana próba logowania";
+    header('location: ./welcome.php');
+    exit();
   }
 ?>
 
@@ -23,7 +18,9 @@
 </head>
 <body>
   <div id="main_chat_window"></div>
-  <input type="button" id="logout_button" value="Wylogowanie"></input>
+  <a href="./logout.php">
+    <input type="button" id="logout_button" value="Wylogowanie"></input>
+  </a>
   <div id="users_window"></div>
   <textarea id="typing_window" name="typing_window" type="text"></textarea>
   <input type="button" id="send_button" value="Wysłanie wiadomości"></input>
