@@ -27,7 +27,7 @@
   </a>
   <div id="users_window"></div>
   <textarea id="typing_window" name="typing_window" type="text"></textarea>
-  <input type="button" id="send_button" value="Wysłanie wiadomości" onclick="printUsersList()"></input>
+  <input type="button" id="send_button" value="Wysłanie wiadomości" onclick="sendMessage()"></input>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

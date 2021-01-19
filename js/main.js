@@ -29,7 +29,7 @@ function addNewMessages(jsonMessages)
 
 function getMessages()
 {
-  var xmlhttp = XMLHttpRequest();
+  var xmlhttp = new XMLHttpRequest();
   var url = "./get_messages.php";
   
   xmlhttp.onreadystatechange = function(){
@@ -45,7 +45,7 @@ function getMessages()
 
 function getUsersList()
 {
-   var xmlhttp = XMLHttpRequest();
+  var xmlhttp = new XMLHttpRequest();
   var url = "./get_users_list.php";
   
   xmlhttp.onreadystatechange = function(){
@@ -71,6 +71,22 @@ function processUsersList()
   setTimeout(processUsersList, 60000);
 }
 
+function sendMessage()
+{
+  var text = document.getElementById('typing_window');
+  var xmlhttp = new XMLHttpRequest();
+  var url = "./store_message.php";
+  xmlhttp.addEventListener("load", e => {
+        if (xmlhttp.status === 200) {
+            console.log(xmlhttp.response);
+        }
+    });
+  xmlhttp.open("POST", url, true);
+  xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xmlhttp.send("text="+text.value);
+  text.value="";
+}
+/*
 var obj = JSON.parse('{' +
 ' "users": [' +
 ' "Andrzej", ' +
@@ -96,3 +112,4 @@ var obj2 = JSON.parse(
 '}');
 
 addNewMessages(obj2);
+*/
