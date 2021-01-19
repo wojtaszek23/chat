@@ -1,4 +1,5 @@
 <?php
+  //open access to session variables
   session_start();
 ?>
 

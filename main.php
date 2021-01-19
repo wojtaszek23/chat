@@ -1,9 +1,12 @@
 <?php
   //open access to session variables
   session_start();
+  //if there is no logged user
   if(!isset($_SESSION['nick_logged']) || $_SESSION['logged'] == false)
   {
+    //return to chat initial screen
     header('location: ./welcome.php');
+    //stop reading this file to load url above imidiately
     exit();
   }
 ?>

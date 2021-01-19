@@ -102,37 +102,52 @@
         $ok = false;
       }
       
+      //some of requirements involving registration data fields did not pass
       if($ok == false)
       {
+        //back to registration page
         header('location: registration.php');
+        //stop executing instructions contained on this page
         exit();
       }
       
+      //all of requirements involving registration data fields passed successfuly
       if($ok == true)
       {
+        //add to Database new user base on all data typed in form
         if( $connection->query("INSERT INTO users (nick, email, password, first_name, last_name, joining_time)
          VALUES ('$nick', '$email', '$passw_hash', '$first_name', '$last_name', now())") == true)
         {
+          //connection with Database isn't neccessary after succesfully adding new user- then close it
           $connection->close();
+          //remove all session variables
           session_reset();
-          $_SESSION['registration_approved'] = true;
+          //set text which will avoid on next, 'login' page
+          $_SESSION['header_text'] = "Rejestracja użytkownika zakończyła się sukcesem. Aby rozpocząć czatowanie, należy się teraz zalogować";
+          //move to login page
           header('location: login.php');
+          //stop executing any next instructions contained on this file imidiately
           exit();
         }
         else
         {
+          //error occured while try of adding new user to Database
           throw new Exception($connection->error);
         }
       }
+      //close connection with Database before leaving page, executed if something undefined would occur wrong
       $connection->close();
+      //stop executing this file
       exit();
     }
+    //executed when some error, usualy involving try of connecting with Database, will occur
     catch(Exception $e)
     {
       echo '<span style="color:red;">Błąd serwera. Proszę o kontakt z administratorem lub zajrzenie tutaj w innym terminie.</span>';
       exit();
     }
   }
+  //when any field provided by user has not correct syntax
   else
   {
     header('location: registration.php');
