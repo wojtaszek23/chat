@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./css/login.css" type="text/css" />
 </head>
 <body>
-  <span id="header"><?php echo $_SESSION['header_text']; unset($_SESSION['header_text']); ?></span> </br> </br>
+  <span id="header"><?php if(isset($_SESSION['header_text'])) echo $_SESSION['header_text']; unset($_SESSION['header_text']); ?></span> </br> </br>
   <form id="form" action="try_login.php" method="post" style="clear:both">
     Nick: </br>
     <input type="text" name="nick" value="<?php

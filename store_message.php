@@ -9,7 +9,7 @@
     exit();
   }
   
-  $session_id = session_id();
+  //$session_id = session_id();
   $text = $_POST['text'];
   $nick = $_SESSION['nick_logged'];
   $connection = new mysqli($host, $db_user, $password, $db_name);
@@ -21,6 +21,4 @@
   
   $connection->query("INSERT INTO chat_messages (nick, text) VALUES ('$nick', '$text')");
   $connection->close();
-  
-  echo "text:".$text;
 ?>
