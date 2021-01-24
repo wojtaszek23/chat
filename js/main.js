@@ -10,7 +10,6 @@ function printUsersList(jsonUsersList)
   {
     var user = jsonUsersList[i];
     users_window.innerHTML = users_window.innerHTML + '<span class="users" id="' + user.nick + '">' + user.nick + '</span>';
-    console.log('<span class="users" id="' + user + '">' + user + '</span>');
   }
 }
 
@@ -19,7 +18,9 @@ function addNewMessages(jsonMessages)
   var chat = document.getElementById("main_chat_window");
   var scrollDownFlag = false;
   
-  //TODO: sprawdzić scrollHeight, scrollTop oraz clientHeight!!! co oznaczają te atrybuty
+  //scrollHeight - pixels value of entire area of element- containing both- hidden and visible content
+  //scrollTop - pixels value of area from beggining of element to beggining (top) of currently showed (scrolled) content
+  //clientHeight - pixels value of showed area of element
   if(chat.scrollHeight - chat.scrollTop - chat.clientHeight < 1)
   {
     scrollDownFlag = true;
@@ -33,7 +34,7 @@ function addNewMessages(jsonMessages)
   }
   
   if(scrollDownFlag)
-  chat.scrollTop = chat.scrollHeight;
+  chat.scrollTop = chat.scrollHeight; //scrollHeight will be always greater than maximum value of scrollTop
 }
 
 function getMessages()
@@ -45,7 +46,6 @@ function getMessages()
   {
     if(this.readyState == 4 && this.status == 200) 
     {
-      console.log(this.responseText);
       if(this.responseText!="")
       {
 	var messages = JSON.parse(this.responseText);
@@ -75,7 +75,6 @@ function getUsersList()
       {
 	users_window.innerHTML = 
 	'<span class="error" id="users_window_error">Wystąpił błąd serwera podczas próby pobrania listy aktualnie zalogowanych użytkowników</span>';
-	console.log(this.readyState + " " + this.status);
       }
     }
   };
@@ -83,17 +82,11 @@ function getUsersList()
   xmlhttp.open("GET", url, true);
   try
   {
-    console.log("blabalbla");
     xmlhttp.send();
   }
   catch(e)
   {
-    console.log("kupo...");
     document.getElementById("users_window").innerHTML = e;
-  }
-  finally
-  {
-    console.log("nie ogarniam...");
   }
 }
 
@@ -110,7 +103,6 @@ function sendMessage()
   var url = "./store_message.php";
   xmlhttp.addEventListener("load", e => {
         if (xmlhttp.status === 200) {
-            console.log(xmlhttp.response);
         }
     });
   xmlhttp.open("POST", url, true);
@@ -125,6 +117,43 @@ function processUsersList()
   setTimeout(processUsersList, 60000);
 }
 
+function askAboutPassiveUsers()
+{
+  var xmlhttp = new XMLHttpRequest();
+  var url = "./logout_passive_users.php";
+  
+  xmlhttp.onreadystatechange = function(){
+    if(this.readyState == 4)
+    {
+      if(this.status == 200)
+      {
+      }
+      else
+      {
+	console.log("na serwerze wystąpił błąd podczas próby wykonania operacji wylogowania biernych użytkowników");
+      }
+    }
+  };
+  
+  xmlhttp.open("GET", url, true);
+  try
+  {
+    xmlhttp.send();
+  }
+  catch(e)
+  {
+    console.log(e);
+  }
+}
+
 processUsersList();
 
 processMessages();
+
+function processPassiveUsers()
+{
+  askAboutPassiveUsers();
+  setTimeout(askAboutPassiveUsers, 60000);
+}
+
+processPassiveUsers();

@@ -10,6 +10,25 @@
     session_reset();
     //store nick name in session variable to write it on a page
     $_SESSION['nick_logout'] = $nick_logout;
+    
+    //attach connection strings to Database
+    require_once "connection_strings.php";
+    
+    //create mysqli object and set connection strings throught constructor parameters,
+    //that constructor opens a new connection with Database also
+    $connection = new mysqli($host, $db_user, $password, $db_name);
+    
+    //if some error occured while try of access connection with Database
+    if($connection->connect_errno != 0)
+    {
+      throw new Exception(myslqi_connect_errno());
+    }
+    
+    $connection->query("UPDATE users set last_activity_time=NOW() where nick='$_SESSION['nick_logout']'");
+    
+    $connection->query("UPDATE users set logged=false where nick='$_SESSION['nick_logout']'");
+    
+    $connecion->close();
   }
   else
   {

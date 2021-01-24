@@ -23,7 +23,8 @@
   }
   
   //set logged value to true for user who asks about other logged users in database
-  $connection->query("UPDATE users set logged=true where nick='$nick'"); 
+  $connection->query("UPDATE users set logged=true where nick='$nick'");
+  $connection->query("UPDATE users set last_activity_time=NOW() where nick='$nick'");
   //take records with logged users
   $result = $connection->query("SELECT nick from users where logged=true");
   //constructor of array in php xD
