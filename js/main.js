@@ -117,6 +117,7 @@ function processUsersList()
   setTimeout(processUsersList, 60000);
 }
 
+/*
 function askAboutPassiveUsers()
 {
   var xmlhttp = new XMLHttpRequest();
@@ -145,15 +146,36 @@ function askAboutPassiveUsers()
     console.log(e);
   }
 }
+*/
 
-processUsersList();
-
-processMessages();
-
+/*
 function processPassiveUsers()
 {
   askAboutPassiveUsers();
   setTimeout(askAboutPassiveUsers, 60000);
 }
+*/
 
-processPassiveUsers();
+function setCatchingReturnKeyOnTypingWindow()
+{
+  document.getElementById('typing_window').addEventListener('keydown', function(e){
+    if (e.keyCode === 13 && !e.shiftKey){
+      e.preventDefault();
+      if (document.getElementById('typing_window') != "")
+      {
+	sendMessage();
+      }
+    }
+  }
+  );
+}
+
+function loadScript()
+{
+  setCatchingReturnKeyOnTypingWindow();
+  processUsersList();
+  processMessages();
+  //processPassiveUsers();
+}
+
+document.addEventListener("DOMContentLoaded",loadScript);

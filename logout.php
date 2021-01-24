@@ -24,11 +24,11 @@
       throw new Exception(myslqi_connect_errno());
     }
     
-    $connection->query("UPDATE users set last_activity_time=NOW() where nick='$_SESSION['nick_logout']'");
+    $connection->query("UPDATE users set last_activity_time=NOW() where nick='$nick_logout'");
     
-    $connection->query("UPDATE users set logged=false where nick='$_SESSION['nick_logout']'");
+    $connection->query("UPDATE users set logged=false where nick='$nick_logout'");
     
-    $connecion->close();
+    $connection->close();
   }
   else
   {
