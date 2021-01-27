@@ -10,7 +10,9 @@
   }
   
   $text = $_POST['text'];
+  $text = htmlentities($text, ENT_QUOTES, "UTF-8");
   $nick = $_SESSION['nick_logged'];
+  $nick = htmlentities($nick);
   $connection = new mysqli($host, $db_user, $password, $db_name);
   
   if($connection->connect_errno != 0)

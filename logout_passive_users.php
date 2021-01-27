@@ -2,13 +2,6 @@
   //attach connection strings to Database
   require_once "connection_strings.php";
   
-  //exit if type of http request is other than get, only get is expected.
-  //exit if there is no nick set in session or user is no logged in session also.
-  if($_SERVER['REQUEST_METHOD'] != "GET")
-  {
-    exit();
-  }
-  
   //create a new connection to sql database
   $connection = new mysqli($host, $db_user, $password, $db_name);
   

@@ -7,13 +7,18 @@
   //exit if type of http request is other than get, only get is expected.
   //exit if there is no nick set in session or user is no logged in session also.
   //exit if id of last message was not send from client side in a get http request.
-  if($_SERVER['REQUEST_METHOD'] != "GET" || !isset($_SESSION['nick_logged']) || $_SESSION['logged']!=true || !isset($_GET['id']))
+  if($_SERVER['REQUEST_METHOD'] != "GET" || !isset($_SESSION['nick_logged']) || $_SESSION['logged']!=true)
+  {
+    exit();
+  }
+  else if(!isset($_GET['id']) || !is_numeric($_GET['id']))
   {
     exit();
   }
   
   //store id of last message to local variable
   $last_id = $_GET['id'];
+  $last_id = htmlentities($last_id, ENT_QUOTES, "UTF-8");
   
   //create a new connection to sql database
   $connection = new mysqli($host, $db_user, $password, $db_name);
