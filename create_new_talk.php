@@ -38,7 +38,6 @@
   $connection->query("ALTER TABLE `chat_messages2`
     MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=148");
   
-  //$connection->query("INSERT INTO chat_messages (nick, text) VALUES ('$nick', '$text')");
   $connection->close();
   
   echo "done korleone";
