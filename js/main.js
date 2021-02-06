@@ -1,21 +1,21 @@
 var id = 0;
-var users_window = document.getElementById("users_window");
+var talk_choice_window = document.getElementById("users_list_window");
 
 
 function printUsersList(jsonUsersList)
 {
-  users_window.innerHTML = "";
+  talk_choice_window.innerHTML = "";
   
   for(var i=0; i<jsonUsersList.length; i++)
   {
     var user = jsonUsersList[i];
-    users_window.innerHTML = users_window.innerHTML + '<span class="users" id="' + user.nick + '">' + user.nick + '</span>';
+    talk_choice_window.innerHTML = talk_choice_window.innerHTML + '<span class="user" id="' + user.nick + '">' + user.nick + '</span>';
   }
 }
 
 function addNewMessages(jsonMessages)
 {
-  var chat = document.getElementById("main_chat_window");
+  var chat = document.getElementById("talk_view_window");
   var scrollDownFlag = false;
   
   //scrollHeight - pixels value of entire area of element- containing both- hidden and visible content
@@ -73,8 +73,8 @@ function getUsersList()
       }
       else
       {
-	users_window.innerHTML = 
-	'<span class="error" id="users_window_error">Wystąpił błąd serwera podczas próby pobrania listy aktualnie zalogowanych użytkowników</span>';
+	talk_choice_window.innerHTML = 
+	'<span class="error" id="talk_choice_window_error">Wystąpił błąd serwera podczas próby pobrania listy aktualnie zalogowanych użytkowników</span>';
       }
     }
   };
@@ -86,7 +86,7 @@ function getUsersList()
   }
   catch(e)
   {
-    document.getElementById("users_window").innerHTML = e;
+    document.getElementById("users_list_window").innerHTML = e;
   }
 }
 
@@ -117,45 +117,6 @@ function processUsersList()
   setTimeout(processUsersList, 60000);
 }
 
-/*
-function askAboutPassiveUsers()
-{
-  var xmlhttp = new XMLHttpRequest();
-  var url = "./logout_passive_users.php";
-  
-  xmlhttp.onreadystatechange = function(){
-    if(this.readyState == 4)
-    {
-      if(this.status == 200)
-      {
-      }
-      else
-      {
-	console.log("na serwerze wystąpił błąd podczas próby wykonania operacji wylogowania biernych użytkowników");
-      }
-    }
-  };
-  
-  xmlhttp.open("GET", url, true);
-  try
-  {
-    xmlhttp.send();
-  }
-  catch(e)
-  {
-    console.log(e);
-  }
-}
-*/
-
-/*
-function processPassiveUsers()
-{
-  askAboutPassiveUsers();
-  setTimeout(askAboutPassiveUsers, 60000);
-}
-*/
-
 function setCatchingReturnKeyOnTypingWindow()
 {
   document.getElementById('typing_window').addEventListener('keydown', function(e){
@@ -170,12 +131,65 @@ function setCatchingReturnKeyOnTypingWindow()
   );
 }
 
+function applyNewTalk()
+{
+  document.getElementById('new_talk_button').style="display: block;";
+  document.getElementById('edit_talk_button').style="display: block;";
+  document.getElementById('add_person_to_talk').style="display: none;";
+  document.getElementById('remove_person_from_talk').style="display: none;";
+  document.getElementById('next_choose_talk_title_button').style="display: none;";
+  document.getElementById('new_talk_title_label').style="display: none;";
+  document.getElementById('new_talk_title_textbox').style="display: none;";
+  document.getElementById('apply_new_talk').style="display: none;";
+}
+
+function chooseTitleOfNewTalk()
+{
+  document.getElementById('new_talk_button').style="display: none;";
+  document.getElementById('edit_talk_button').style="display: none;";
+  document.getElementById('add_person_to_talk').style="display: none;";
+  document.getElementById('remove_person_from_talk').style="display: none;";
+  document.getElementById('next_choose_talk_title_button').style="display: none;";
+  document.getElementById('new_talk_title_label').style="display: block;";
+  document.getElementById('new_talk_title_textbox').style="display: block;";
+  document.getElementById('apply_new_talk').style="display: block;";
+}
+
+function showNewTalkPanel()
+{
+  document.getElementById('new_talk_title_label').style="display: none;";
+  document.getElementById('new_talk_title_textbox').style="display: none;";
+  document.getElementById('apply_new_talk').style="display: none;";
+  document.getElementById('new_talk_button').style="display: none;";
+  document.getElementById('edit_talk_button').style="display: none;";
+  document.getElementById('add_person_to_talk').style="display: block;";
+  document.getElementById('remove_person_from_talk').style="display: block;";
+  document.getElementById('next_choose_talk_title_button').style="display: block;";
+  document.getElementById('current_talk_title').innerHTML="<b>[Nowa rozmowa]</b>";
+}
+
 function loadScript()
 {
   setCatchingReturnKeyOnTypingWindow();
   processUsersList();
   processMessages();
-  //processPassiveUsers();
+}
+
+function abc()
+{
+  var xmlhttp = new XMLHttpRequest();
+  var url = "./create_new_talk.php";
+  
+  xmlhttp.onreadystatechange = function()
+  {
+    if(this.readyState == 4 && this.status == 200) 
+    {
+      console.log(this.responseText);
+    }
+  };
+  
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
 }
 
 document.addEventListener("DOMContentLoaded",loadScript);
