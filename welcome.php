@@ -7,6 +7,6 @@
   <link rel="stylesheet" href="./css/welcome.css" type="text/css" />
 </head>
 <body>
-  <h1>Witaj na czacie, na którym będziesz mogła/mógł pisać z innymi użytkownikami.</br> Naciśnij <a href="./registration.php">Rejestracja</a>, aby założyć konto. Jeśli już je posiadasz, zapraszam do <a href="./login.php">zalogowania się</a>.</h1>
+  <h1>Witaj na czacie, na którym będziesz mogła/mógł pisać z innymi użytkownikami.</br> Naciśnij <a href="../registration.php">Rejestracja</a>, aby założyć konto. Jeśli już je posiadasz, zapraszam do <a href="./login.php">zalogowania się</a>.</h1>
 </body>
 </html>

@@ -12,11 +12,11 @@
     $_SESSION['nick_logout'] = $nick_logout;
     
     //attach connection strings to Database
-    require_once "connection_strings.php";
+    require_once "../connection_strings.php";
     
     //create mysqli object and set connection strings throught constructor parameters,
     //that constructor opens a new connection with Database also
-    $connection = new mysqli($host, $db_user, $password, $db_name);
+    $connection = new mysqli($host, $db_user, $password, $db_name_users);
     
     //if some error occured while try of access connection with Database
     if($connection->connect_errno != 0)

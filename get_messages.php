@@ -2,7 +2,7 @@
   //open access to session variables
   session_start();
   //attach connection strings to Database
-  require_once "connection_strings.php";
+  require_once "../connection_strings.php";
   
   //exit if type of http request is other than get, only get is expected.
   //exit if there is no nick set in session or user is no logged in session also.
@@ -21,7 +21,7 @@
   $last_id = htmlentities($last_id, ENT_QUOTES, "UTF-8");
   
   //create a new connection to sql database
-  $connection = new mysqli($host, $db_user, $password, $db_name);
+  $connection = new mysqli($host, $db_user, $password, $db_name_chat);
   
   //if some error occured while creating mysqli object or attempting connection with database 
   if($connection->connect_errno != 0)
